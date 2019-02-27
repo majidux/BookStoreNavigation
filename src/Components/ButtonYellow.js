@@ -4,9 +4,9 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 export default class ButtonYellow extends Component {
     render() {
         return (
-            <TouchableOpacity>
-                <View style={[styles.signUpButtonView,styles.commonButtonsStyle]}><Text style={styles.textStyle}>SIGN UP</Text></View>
-            </TouchableOpacity>
+            <View style={styles.className}>
+                <Text>Yellow</Text>
+            </View>
         );
     }
 }
