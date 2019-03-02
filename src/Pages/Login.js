@@ -1,57 +1,169 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions, Image, Animated, LayoutAnimation, Easing, TextInput} from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Dimensions,
+    Image,
+    Animated,
+    LayoutAnimation,
+    Easing,
+    TextInput,
+    TouchableOpacity
+} from 'react-native';
+import {createAppContainer,createStackNavigator,createSwitchNavigator} from 'react-navigation';
+import ForgetPass from "../Components/ForgetPass";
+import BookStore from "./BookStore";
 
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
-export default class Login extends Component {
-    constructor(props){
+
+
+class Login extends Component {
+    
+    
+    constructor(props) {
         super(props);
-        this.state={
-            movingAnimate:new Animated.Value(-100)
+        this.state = {
+            movingAnimate: new Animated.Value(-100),
+            buttonAnimateState: new Animated.Value(200),
+            emailState: new Animated.Value(400),
+            passwordState: new Animated.Value(-400),
+            opacityState: new Animated.Value(0)
         }
     }
+    
     componentDidMount(): void {
-        this.animationFunc()
+        this.animationFunc();
+        this.buttonAnimate();
+        this.emailFunc();
+        this.passwordFunc();
+        this.opacityAnimateFunc();
     }
     
     animationFunc = () => {
         Animated.timing(
-            this.state.movingAnimate,
+            this.state.buttonAnimateState,
             {
-                toValue:50,
-                duration:1000,
-                easing:Easing.back(),
-                useNativeDriver:true
+                toValue: 10,
+                duration: 1000,
+                easing: Easing.back(),
+                useNativeDriver: true
             }
         ).start()
     };
+    
+    opacityAnimateFunc = () => {
+        Animated.timing(
+            this.state.opacityState,
+            {
+                toValue: 1,
+                duration: 1000,
+                easing: Easing.back(),
+                useNativeDriver: true
+            }
+        ).start()
+    };
+    
+    passwordFunc = () => {
+        Animated.timing(
+            this.state.passwordState,
+            {
+                toValue: 0,
+                duration: 1000,
+                easing: Easing.back(),
+                useNativeDriver: true
+            }
+        ).start()
+    };
+    
+    emailFunc = () => {
+        Animated.timing(
+            this.state.emailState,
+            {
+                toValue: 0,
+                duration: 1000,
+                easing: Easing.back(),
+                useNativeDriver: true
+            }
+        ).start()
+    };
+    
+    buttonAnimate = () => {
+        Animated.timing(
+            this.state.movingAnimate,
+            {
+                toValue: 50,
+                duration: 1000,
+                easing: Easing.back(),
+                useNativeDriver: true
+            }
+        ).start()
+    };
+    
     render() {
         return (
-            <View style={styles.container}>
-                <Image
+            <Animated.View style={styles.container}>
+                <Animated.Image
                     source={require('../Assets/image/designRaw.png')}
-                    style={styles.backGroundImage}
+                    style={[styles.backGroundImage,{opacity: this.state.opacityState}]}
                 />
                 <View style={styles.itemView}>
-                    <Animated.View style={[styles.itemViewLogo,{transform:[{translateY:this.state.movingAnimate}]}]}>
+                    <Animated.View style={[styles.itemViewLogo, {transform: [{translateY: this.state.movingAnimate}]}]}>
                         <Image
                             source={require('../Assets/image/logo.png')}
                             style={styles.image}
                         />
                     </Animated.View>
                     <View style={styles.itemViewInput}>
-                       <View style={styles.userName}>
-                           <Image
+                        <Animated.View style={[styles.userName,{transform:[{translateX:this.state.emailState}]}]}>
+                            <Image
                                 source={require('../Assets/image/user.png')}
-                           />
-                           <TextInput placeholder={'Email'}/>
-                       </View>
+                                style={styles.imageUser}
+                            />
+                            <TextInput placeholder={'Email'} placeholderTextColor={'#fff'}/>
+                        </Animated.View>
+                        <Animated.View style={[styles.userName,{transform:[{translateX:this.state.passwordState}]}]}>
+                            <Image
+                                source={require('../Assets/image/padlock.png')}
+                                style={[styles.imageUser]}
+                            />
+                            <TextInput placeholder={'Password'} placeholderTextColor={'#fff'}/>
+                        </Animated.View>
+                        <Animated.View style={[styles.buttonStyleView,{transform:[{translateY:this.state.buttonAnimateState}]}]}>
+                            <TouchableOpacity
+                                onPress={()=>this.props.navigation.navigate('BookStore')}
+                            >
+                                <View style={[styles.loginButtonView,styles.commonButtonsStyle]}><Text style={styles.textStyle}>LOGIN</Text></View>
+                            </TouchableOpacity>
+                        </Animated.View>
+                        <Animated.View style={[styles.forgetPass,{opacity:this.state.opacityState}]}>
+                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('ForgetPass')}>
+                                <Text style={{color:'#fff'}}>Forget your password ?</Text>
+                            </TouchableOpacity>
+                        </Animated.View>
                     </View>
                 </View>
-            </View>
+            </Animated.View>
         );
     }
 }
+
+const RouteStack = createSwitchNavigator(
+    {
+        Login:Login,
+        ForgetPass:ForgetPass,
+        BookStore:BookStore
+    },
+    {
+        mode:'modal'
+    },
+    {
+        initialRouteName:Login
+    },
+);
+
+export default createAppContainer(RouteStack);
 
 const styles = StyleSheet.create({
     container: {
@@ -64,35 +176,63 @@ const styles = StyleSheet.create({
         height: 150,
         transform: [
             {rotateY: '260deg'},
-            {translateY:-50}
+            {translateY: -50}
         ],
     },
-    itemView:{
-        // justifyContent:'space-between',
-        flex:1,
+    itemView: {
+        flex: 1,
     },
-    image:{
+    image: {
         width: 100,
         height: 100
     },
-    imageView:{
-        alignItems:'center',
-        flex:1
+    imageView: {
+        alignItems: 'center',
+        flex: 1
     },
-    backGroundImage:{
-        width:deviceWidth,
-        height:deviceHeight,
-        position:'absolute'
+    backGroundImage: {
+        width: deviceWidth,
+        height: deviceHeight,
+        position: 'absolute'
     },
-    itemViewLogo:{
-        flex:2,
+    itemViewLogo: {
+        flex: 2,
         alignItems: 'center',
     },
-    itemViewInput:{
-        backgroundColor:'#2cff4c',
-        flex:1
+    itemViewInput: {
+        // backgroundColor: 'lightgreen',
+        flex: 1
     },
-    userName:{
-        flexDirection:'row'
+    userName: {
+        flexDirection: 'row',
+        // justifyContent:'space-between',
+        // backgroundColor:'#fff',
+        alignItems:'center',
+        marginHorizontal: 30,
+        borderBottomWidth:1,
+        borderColor:'#fff'
+    },
+    imageUser:{
+        // width:50,
+        // height:50
+        marginHorizontal:30
+    },
+    commonButtonsStyle:{
+        width:130,
+        height:50,
+        justifyContent: "center",
+        alignItems: 'center',
+        borderRadius:5,
+        backgroundColor:'#ffc107'
+    },
+    buttonStyleView:{
+        justifyContent: 'center',
+        alignItems:'center',
+        marginTop:20
+    },
+    forgetPass:{
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop: 20
     }
 });
