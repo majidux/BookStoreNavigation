@@ -14,6 +14,7 @@ import {
 import {createAppContainer,createStackNavigator,createSwitchNavigator} from 'react-navigation';
 import ForgetPass from "../Components/ForgetPass";
 import BookStore from "./BookStore";
+import SignUp from "./SignUp";
 
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;

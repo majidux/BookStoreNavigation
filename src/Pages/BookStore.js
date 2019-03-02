@@ -13,5 +13,6 @@ export default class BookStore extends Component {
 const styles = StyleSheet.create({
     bookStore: {
         flex: 1,
+        backgroundColor:'#e85'
     }
 });

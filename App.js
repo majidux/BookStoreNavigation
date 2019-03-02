@@ -3,14 +3,19 @@ import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react
 import Login from "./src/Pages/Login";
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import SignUp from "./src/Pages/SignUp";
+import {createStore,applyMiddleware} from "redux";
+import {Provider} from "react-redux";
+import thunk from 'redux-thunk';
+import rootReducer from "./src/Services/combiner";
 
 let deviceWidth = Dimensions.get('window').width;
 
-
+const initialState={};
+export const store = createStore(rootReducer,initialState,applyMiddleware(thunk));
 class App extends Component {
   render() {
     return (
-        <View style={styles.container}>
+        <Provider store={store} style={styles.container}>
             <View style={styles.blueView}></View>
             <View style={styles.imageView}>
                 <Image
@@ -27,7 +32,7 @@ class App extends Component {
                     <View style={[styles.loginButtonView,styles.commonButtonsStyle]}><Text style={styles.textStyle}>LOGIN</Text></View>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Provider>
     );
   }
 }

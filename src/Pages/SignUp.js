@@ -13,6 +13,6 @@ export default class SignUp extends Component {
 const styles = StyleSheet.create({
     className: {
         flex: 1,
-        backgroundColor:'#e85'
+        backgroundColor:'#e45'
     }
 });
