@@ -20,7 +20,9 @@ let deviceHeight = Dimensions.get('window').height;
 
 
 class Login extends Component {
-    
+    static navigationOptions = {
+            headerTransparent:true,
+    };
     
     constructor(props) {
         super(props);
@@ -101,6 +103,10 @@ class Login extends Component {
         ).start()
     };
     
+    forgetPassFunc=()=>{
+        this.props.navigation.navigate('ForgetPass')
+    };
+    
     render() {
         return (
             <Animated.View style={styles.container}>
@@ -138,7 +144,7 @@ class Login extends Component {
                             </TouchableOpacity>
                         </Animated.View>
                         <Animated.View style={[styles.forgetPass,{opacity:this.state.opacityState}]}>
-                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('ForgetPass')}>
+                            <TouchableOpacity onPress={this.forgetPassFunc}>
                                 <Text style={{color:'#fff'}}>Forget your password ?</Text>
                             </TouchableOpacity>
                         </Animated.View>
@@ -149,18 +155,12 @@ class Login extends Component {
     }
 }
 
-const RouteStack = createSwitchNavigator(
+const RouteStack = createStackNavigator(
     {
         Login:Login,
         ForgetPass:ForgetPass,
         BookStore:BookStore
-    },
-    {
-        mode:'modal'
-    },
-    {
-        initialRouteName:Login
-    },
+    }
 );
 
 export default createAppContainer(RouteStack);
