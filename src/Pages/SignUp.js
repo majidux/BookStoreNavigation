@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import {connect} from "react-redux";
+import {userFetcher} from "../Services/fetchUsers/actionUser";
 
-export default class SignUp extends Component {
+class SignUp extends Component {
+    componentDidMount() {
+        this.props.userFetcher()
+    }
+    
     render() {
         return (
             <View style={styles.className}>
@@ -16,3 +22,9 @@ const styles = StyleSheet.create({
         backgroundColor:'#e45'
     }
 });
+const mapStateToProps=(state)=>{
+    return{
+        users:state.userReducer
+    }
+};
+export default connect(mapStateToProps,{userFetcher})(SignUp)

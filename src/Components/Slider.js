@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, FlatList, Dimensions, Animated, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {connect} from "react-redux";
 import {thunkAction} from "../Services/fetchBooks/actions";
 
@@ -8,6 +9,9 @@ let deviceHeight = Dimensions.get('window').height;
 const {width} = Dimensions.get('window');
 
 class Slider extends Component {
+    
+    
+    
     constructor(props){
         super(props);
         this.state={
@@ -29,6 +33,7 @@ class Slider extends Component {
                 <View style={styles.discoverTitleView}>
                     <View>
                         <Text style={styles.discoverTitleText}>Discover</Text>
+                        <Icon name="rocket" size={30} color="#900" />
                     </View>
                 </View>
                 <View style={styles.flatList}>

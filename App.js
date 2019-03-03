@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import rootReducer from "./src/Services/combiner";
 import Splash from "./src/Pages/Splash";
 import BookStore from "./src/Pages/BookStore";
+import SignUp from "./src/Pages/SignUp";
 
 let deviceWidth = Dimensions.get('window').width;
 
@@ -17,7 +18,8 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <Splash/>
+                    {/*<Splash/>*/}
+                    <SignUp/>
                     {/*<BookStore/>*/}
                 </View>
             </Provider>

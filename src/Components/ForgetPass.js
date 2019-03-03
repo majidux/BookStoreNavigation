@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, Dimensions, TextInput, TouchableHighlight, TouchableOpacity} from 'react-native';
-import {createAppContainer, createSwitchNavigator, createStackNavigator} from "react-navigation";
-import BookStore from "../Pages/BookStore";
-import Login from "../Pages/Login";
-import BackButton from "./BackButton";
-
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
