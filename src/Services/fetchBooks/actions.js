@@ -3,9 +3,9 @@ import {FETCH_BOOKS,SUCCESS_BOOKS,FAILED_BOOKS} from './type';
 export const fetchBooks = () =>({
     type:FETCH_BOOKS
 });
-export const successBooks = () =>({
+export const successBooks = (items) =>({
     type:SUCCESS_BOOKS,
-    payload:item
+    payload:items
 });
 export const failedData =()=>({
     type:FAILED_BOOKS,
@@ -14,10 +14,10 @@ export const failedData =()=>({
 export const thunkAction=()=>{
     return(dispatch)=>{
         dispatch(fetchBooks());
-        fetch(`http://localhost:3000/items`)
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=movie`)
             .then(response=>response.json())
             .then(data =>{
-                dispatch(successBooks(data));
+                dispatch(successBooks(data.items));
             })
             .catch(error=>dispatch(failedData(error)));
     }

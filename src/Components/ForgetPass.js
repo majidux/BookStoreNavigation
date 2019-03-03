@@ -12,12 +12,13 @@ const gradientHeight = 500;
 const gradientColor = '#fb9600';
 const data = Array.from({length: gradientHeight});
 
-class ForgetPass extends Component {
+export default class ForgetPass extends Component {
     
-    static navigationOptions =  {
+    static navigationOptions = {
         
-            // headerTransparent: true,
-            headerTintColor:'red'
+        headerTransparent: true,
+        headerTintColor: '#000',
+        title: 'Forget Password'
     };
     
     render() {
@@ -47,19 +48,6 @@ class ForgetPass extends Component {
         );
     }
 }
-
-const Router = createStackNavigator(
-    {
-        ForgetPass: ForgetPass,
-    },
-    {
-        headerMode:'none',
-        mode:'modal'
-    },
-);
-
-
-export default createAppContainer(Router)
 
 
 const styles = StyleSheet.create({
@@ -101,8 +89,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    titleText:{
-        color:'#000',
-        fontSize:30
+    titleText: {
+        color: '#000',
+        fontSize: 30
     }
 });

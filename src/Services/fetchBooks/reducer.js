@@ -11,7 +11,8 @@ export const fetchProductReducer =(state=initialState,action)=>{
             return{
                 ...state,
                 loading: true,
-                error:null
+                error:null,
+                
             }
         }
         case SUCCESS_BOOKS:{
