@@ -9,8 +9,12 @@ class SignUp extends Component {
     }
     
     render() {
+        let user = this.props.users.userData;
         return (
             <View style={styles.className}>
+                {
+                    console.log(user)
+                }
                 <Text>SignUp</Text>
             </View>
         );
@@ -19,7 +23,9 @@ class SignUp extends Component {
 const styles = StyleSheet.create({
     className: {
         flex: 1,
-        backgroundColor:'#e45'
+        backgroundColor:'#e45',
+        justifyContent:'center',
+        alignItems:'center'
     }
 });
 const mapStateToProps=(state)=>{

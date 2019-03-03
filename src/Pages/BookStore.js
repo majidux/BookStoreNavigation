@@ -9,7 +9,6 @@ import {
 import Slider from "../Components/Slider";
 import PopularBooks from "../Components/PopularBooks";
 import Recommended from "../Components/Recommended";
-import Icon from "react-native-vector-icons";
 import Search from "./Search";
 
 class BookStore extends Component {

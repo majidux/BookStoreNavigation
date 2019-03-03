@@ -3,9 +3,9 @@ import {FETCH_USERS, SUCCESS_USERS, FAILED_USERS} from './userType';
 export const fetchBooks = () => ({
     type: FETCH_USERS
 });
-export const successBooks = (items) => ({
+export const successBooks = (user) => ({
     type: SUCCESS_USERS,
-    payload: items
+    payload: user
 });
 export const failedData = () => ({
     type: FAILED_USERS,
@@ -13,11 +13,13 @@ export const failedData = () => ({
 });
 export const userFetcher = () => {
     return (dispatch) => {
+        let dataUser = `http://localhost:3000/users`;
         dispatch(fetchBooks());
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=movie`)
+        fetch(dataUser, {method: 'POST'})
             .then(response => response.json())
             .then(data => {
-                dispatch(successBooks(data.items));
+                dispatch(successBooks(data.user));
+                console.log(data)
             })
             .catch(error => dispatch(failedData(error)));
     }
