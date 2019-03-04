@@ -33,7 +33,7 @@ class Slider extends Component {
                 <View style={styles.discoverTitleView}>
                     <View>
                         <Text style={styles.discoverTitleText}>Discover</Text>
-                        <Icon name="rocket" size={30} color="#900" />
+                        {/*<Icon name="rocket" size={30} color="#900" />*/}
                     </View>
                 </View>
                 <View style={styles.flatList}>

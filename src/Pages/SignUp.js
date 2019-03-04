@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {connect} from "react-redux";
 import {userFetcher} from "../Services/fetchUsers/actionUser";
-// import Svg,{Rect,Circle} from "react-native-svg";
+import Svg,{Rect,Circle} from "react-native-svg";
 
 class SignUp extends Component {
     componentDidMount() {
