@@ -15,6 +15,6 @@ export default class Search extends Component {
 const styles = StyleSheet.create({
     className: {
         flex: 1,
-        backgroundColor:'#67ff81'
+        backgroundColor:'#42ff9c'
     }
 });

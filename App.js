@@ -7,6 +7,7 @@ import rootReducer from "./src/Services/combiner";
 import Splash from "./src/Pages/Splash";
 import BookStore from "./src/Pages/BookStore";
 import SignUp from "./src/Pages/SignUp";
+import Login from "./src/Pages/Login";
 
 let deviceWidth = Dimensions.get('window').width;
 
@@ -20,7 +21,8 @@ class App extends Component {
                 <View style={styles.container}>
                     {/*<Splash/>*/}
                     {/*<SignUp/>*/}
-                    <BookStore/>
+                    {/*<BookStore/>*/}
+                    <Login/>
                 </View>
             </Provider>
         );

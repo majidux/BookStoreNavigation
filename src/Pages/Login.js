@@ -11,7 +11,7 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
-import {createAppContainer,createStackNavigator,createSwitchNavigator} from 'react-navigation';
+import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
 import ForgetPass from "../Components/ForgetPass";
 import BookStore from "./BookStore";
 import SignUp from "./SignUp";
@@ -22,7 +22,7 @@ let deviceHeight = Dimensions.get('window').height;
 
 class Login extends Component {
     static navigationOptions = {
-            headerTransparent:true,
+        headerTransparent: true,
     };
     
     constructor(props) {
@@ -30,21 +30,18 @@ class Login extends Component {
         this.state = {
             movingAnimate: new Animated.Value(-100),
             buttonAnimateState: new Animated.Value(200),
-            emailState: new Animated.Value(400),
-            passwordState: new Animated.Value(-400),
+            emailState: new Animated.Value(100),
+            passwordState: new Animated.Value(-100),
             opacityState: new Animated.Value(0)
         }
     }
     
     componentDidMount(): void {
-        this.animationFunc();
-        this.buttonAnimate();
-        this.emailFunc();
-        this.passwordFunc();
-        this.opacityAnimateFunc();
+        this.animationParallel();
     }
     
-    animationFunc = () => {
+    animationParallel = () => ([
+        
         Animated.timing(
             this.state.buttonAnimateState,
             {
@@ -53,10 +50,7 @@ class Login extends Component {
                 easing: Easing.back(),
                 useNativeDriver: true
             }
-        ).start()
-    };
-    
-    opacityAnimateFunc = () => {
+        ).start(),
         Animated.timing(
             this.state.opacityState,
             {
@@ -65,10 +59,7 @@ class Login extends Component {
                 easing: Easing.back(),
                 useNativeDriver: true
             }
-        ).start()
-    };
-    
-    passwordFunc = () => {
+        ).start(),
         Animated.timing(
             this.state.passwordState,
             {
@@ -77,10 +68,7 @@ class Login extends Component {
                 easing: Easing.back(),
                 useNativeDriver: true
             }
-        ).start()
-    };
-    
-    emailFunc = () => {
+        ).start(),
         Animated.timing(
             this.state.emailState,
             {
@@ -89,10 +77,7 @@ class Login extends Component {
                 easing: Easing.back(),
                 useNativeDriver: true
             }
-        ).start()
-    };
-    
-    buttonAnimate = () => {
+        ).start(),
         Animated.timing(
             this.state.movingAnimate,
             {
@@ -102,9 +87,9 @@ class Login extends Component {
                 useNativeDriver: true
             }
         ).start()
-    };
+    ]);
     
-    forgetPassFunc=()=>{
+    forgetPassFunc = () => {
         this.props.navigation.navigate('ForgetPass')
     };
     
@@ -113,7 +98,7 @@ class Login extends Component {
             <Animated.View style={styles.container}>
                 <Animated.Image
                     source={require('../Assets/image/designRaw.png')}
-                    style={[styles.backGroundImage,{opacity: this.state.opacityState}]}
+                    style={[styles.backGroundImage, {opacity: this.state.opacityState}]}
                 />
                 <View style={styles.itemView}>
                     <Animated.View style={[styles.itemViewLogo, {transform: [{translateY: this.state.movingAnimate}]}]}>
@@ -123,30 +108,32 @@ class Login extends Component {
                         />
                     </Animated.View>
                     <View style={styles.itemViewInput}>
-                        <Animated.View style={[styles.userName,{transform:[{translateX:this.state.emailState}]}]}>
+                        <Animated.View style={[styles.userName, {transform: [{translateX: this.state.emailState}]}]}>
                             <Image
                                 source={require('../Assets/image/user.png')}
                                 style={styles.imageUser}
                             />
                             <TextInput placeholder={'Email'} placeholderTextColor={'#fff'}/>
                         </Animated.View>
-                        <Animated.View style={[styles.userName,{transform:[{translateX:this.state.passwordState}]}]}>
+                        <Animated.View style={[styles.userName, {transform: [{translateX: this.state.passwordState}]}]}>
                             <Image
                                 source={require('../Assets/image/padlock.png')}
                                 style={[styles.imageUser]}
                             />
                             <TextInput placeholder={'Password'} placeholderTextColor={'#fff'}/>
                         </Animated.View>
-                        <Animated.View style={[styles.buttonStyleView,{transform:[{translateY:this.state.buttonAnimateState}]}]}>
+                        <Animated.View
+                            style={[styles.buttonStyleView, {transform: [{translateY: this.state.buttonAnimateState}]}]}>
                             <TouchableOpacity
-                                onPress={()=>this.props.navigation.navigate('BookStore')}
+                                onPress={() => this.props.navigation.navigate('BookStore')}
                             >
-                                <View style={[styles.loginButtonView,styles.commonButtonsStyle]}><Text style={styles.textStyle}>LOGIN</Text></View>
+                                <View style={[styles.loginButtonView, styles.commonButtonsStyle]}><Text
+                                    style={styles.textStyle}>LOGIN</Text></View>
                             </TouchableOpacity>
                         </Animated.View>
-                        <Animated.View style={[styles.forgetPass,{opacity:this.state.opacityState}]}>
+                        <Animated.View style={[styles.forgetPass, {opacity: this.state.opacityState}]}>
                             <TouchableOpacity onPress={this.forgetPassFunc}>
-                                <Text style={{color:'#fff'}}>Forget your password ?</Text>
+                                <Text style={{color: '#fff'}}>Forget your password ?</Text>
                             </TouchableOpacity>
                         </Animated.View>
                     </View>
@@ -158,9 +145,9 @@ class Login extends Component {
 
 const RouteStack = createStackNavigator(
     {
-        Login:Login,
-        ForgetPass:ForgetPass,
-        BookStore:BookStore
+        Login: Login,
+        ForgetPass: ForgetPass,
+        BookStore: BookStore
     }
 );
 
@@ -208,32 +195,32 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         // justifyContent:'space-between',
         // backgroundColor:'#fff',
-        alignItems:'center',
+        alignItems: 'center',
         marginHorizontal: 30,
-        borderBottomWidth:1,
-        borderColor:'#fff'
+        borderBottomWidth: 1,
+        borderColor: '#fff'
     },
-    imageUser:{
+    imageUser: {
         // width:50,
         // height:50
-        marginHorizontal:30
+        marginHorizontal: 30
     },
-    commonButtonsStyle:{
-        width:130,
-        height:50,
+    commonButtonsStyle: {
+        width: 130,
+        height: 50,
         justifyContent: "center",
         alignItems: 'center',
-        borderRadius:5,
-        backgroundColor:'#ffc107'
+        borderRadius: 5,
+        backgroundColor: '#ffc107'
     },
-    buttonStyleView:{
+    buttonStyleView: {
         justifyContent: 'center',
-        alignItems:'center',
-        marginTop:20
+        alignItems: 'center',
+        marginTop: 20
     },
-    forgetPass:{
-        justifyContent:'center',
-        alignItems:'center',
+    forgetPass: {
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 20
     }
 });
