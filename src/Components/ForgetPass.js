@@ -58,12 +58,6 @@ const styles = StyleSheet.create({
         left: 0,
         zIndex: 2,
     },
-    _header: {
-        width: deviceWidth,
-        height: 50,
-        backgroundColor: '#fb9600',
-        flexDirection: 'row'
-    },
     backArrow: {
         flex: 1,
     },

@@ -11,6 +11,7 @@ import PopularBooks from "../Components/PopularBooks";
 import Recommended from "../Components/Recommended";
 import Search from "./Search";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Setting from "./Setting";
 
 class BookStore extends Component {
     
@@ -56,13 +57,22 @@ const TabNavigator = createBottomTabNavigator(
                     <Icon name="search" size={20} color={color}/>
                 )
             }
+        },
+        Setting: {
+            screen: Setting,
+        
+            navigationOptions: {
+                tabBarIcon: ({tintColor: color}) => (
+                    <Icon name="gear" size={20} color={color}/>
+                )
+            }
         }
     },
     {
         tabBarOptions: {
             showLabel: false,
             style: {
-                backgroundColor: '#206bec'
+                backgroundColor: '#254dec'
             },
             
             activeTintColor: '#fff',
