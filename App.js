@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions,StyleSheet,View} from 'react-native';
+import {Dimensions,StyleSheet,View,Text} from 'react-native';
 import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import thunk from 'redux-thunk';
@@ -18,8 +18,8 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    {/*<Splash/>*/}
-                    <SignUp/>
+                    <Splash/>
+                    {/*<SignUp/>*/}
                     {/*<BookStore/>*/}
                 </View>
             </Provider>

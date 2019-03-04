@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, FlatList, Dimensions, Animated, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+// import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {connect} from "react-redux";
 import {thunkAction} from "../Services/fetchBooks/actions";
 
