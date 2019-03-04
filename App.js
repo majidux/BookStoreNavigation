@@ -18,8 +18,8 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <Splash/>
-                    {/*<SignUp/>*/}
+                    {/*<Splash/>*/}
+                    <SignUp/>
                     {/*<BookStore/>*/}
                 </View>
             </Provider>

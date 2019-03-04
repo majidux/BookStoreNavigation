@@ -28,8 +28,8 @@ class SignUp extends Component {
                     <Rect
                         x={'15'}
                         y={'15'}
-                        width={'70'}
-                        height={'70'}
+                        width={'40'}
+                        height={'40'}
                         stroke={'#e45'}
                         strokeWidth={'2'}
                         fill={'yellow'}
