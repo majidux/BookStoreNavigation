@@ -18,8 +18,7 @@ export const userFetcher = () => {
         fetch(dataUser, {method: 'POST'})
             .then(response => response.json())
             .then(data => {
-                dispatch(successBooks(data.user));
-                console.log(data)
+                dispatch(successBooks(data));
             })
             .catch(error => dispatch(failedData(error)));
     }
