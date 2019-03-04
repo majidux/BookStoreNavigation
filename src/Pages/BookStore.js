@@ -10,14 +10,13 @@ import Slider from "../Components/Slider";
 import PopularBooks from "../Components/PopularBooks";
 import Recommended from "../Components/Recommended";
 import Search from "./Search";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class BookStore extends Component {
     
     static navigationOptions = {
-        
         headerTransparent: true,
         headerTintColor: '#000',
-        
     };
     
     render() {
@@ -34,36 +33,56 @@ class BookStore extends Component {
                         <Recommended/>
                     </View>
                 </ScrollView>
-                
             </View>
         );
     }
 }
+
 const TabNavigator = createBottomTabNavigator(
     {
-        BookStore:BookStore,
-        Search:Search
+        BookStore: {
+            screen: BookStore,
+            navigationOptions: {
+                tabBarIcon: ({tintColor: color}) => (
+                    <Icon name="home" size={30} color={color}/>
+                )
+            }
+        },
+        Search: {
+            screen: Search,
+            
+            navigationOptions: {
+                tabBarIcon: ({tintColor: color}) => (
+                    <Icon name="search" size={20} color={color}/>
+                )
+            }
+        }
     },
     {
-        tabBarOptions:{
-            style:{
-                backgroundColor: '#5ca6ec'
+        tabBarOptions: {
+            showLabel: false,
+            style: {
+                backgroundColor: '#206bec'
             },
-            showIcon:false
+            
+            activeTintColor: '#fff',
+            inactiveTintColor: '#bdbdbd',
         }
     }
 );
+export default createAppContainer(TabNavigator);
 
-export default createAppContainer(TabNavigator)
+
 const styles = StyleSheet.create({
     bookStore: {
         flex: 1,
         backgroundColor: '#206bec'
     },
-    sliderView:{
-        flex:1
+    sliderView: {
+        flex: 1
     },
-    popular:{
-        flex:2
-    }
+    popular: {
+        flex: 2
+    },
+    
 });
