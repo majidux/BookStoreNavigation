@@ -7,7 +7,7 @@ export const successBooks = (user) => ({
     type: SUCCESS_USERS,
     payload: user
 });
-export const failedData = () => ({
+export const failedData = (error) => ({
     type: FAILED_USERS,
     payload: error
 });

@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, FlatList, ScrollView} from 'react-native';
-import {
-    createAppContainer,
-    createBottomTabNavigator,
-    createDrawerNavigator,
-    createSwitchNavigator
-} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
 import Slider from "../Components/Slider";
 import PopularBooks from "../Components/PopularBooks";
 import Recommended from "../Components/Recommended";
@@ -17,7 +12,6 @@ class BookStore extends Component {
     
     static navigationOptions = {
         headerTransparent: true,
-        headerTintColor: '#000',
     };
     
     render() {
@@ -51,7 +45,6 @@ const TabNavigator = createBottomTabNavigator(
         },
         Search: {
             screen: Search,
-            
             navigationOptions: {
                 tabBarIcon: ({tintColor: color}) => (
                     <Icon name="search" size={20} color={color}/>
@@ -60,7 +53,6 @@ const TabNavigator = createBottomTabNavigator(
         },
         Setting: {
             screen: Setting,
-        
             navigationOptions: {
                 tabBarIcon: ({tintColor: color}) => (
                     <Icon name="gear" size={20} color={color}/>

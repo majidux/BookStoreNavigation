@@ -5,7 +5,6 @@ import {thunkAction} from "../Services/fetchBooks/actions";
 
 class PopularBooks extends Component {
     
-    
     moreBooks = () => {
         this.props.navigation.navigate('MoreBooks')
     };
@@ -15,7 +14,9 @@ class PopularBooks extends Component {
         return (
             <View style={styles.className}>
                 <View style={styles.popularTitleView}>
-                    <View><Text style={styles.popularTitleText}>Popular</Text></View>
+                    <View>
+                        <Text style={styles.popularTitleText}>Popular</Text>
+                    </View>
                     <View>
                         <TouchableOpacity onPress={this.moreBooks}>
                             <Text style={styles.moreTitleText}>More</Text>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     bookTitleView: {
-        marginVertical:10
+        marginVertical: 10
     }
 });
 const mapStateToProps = (state) => {

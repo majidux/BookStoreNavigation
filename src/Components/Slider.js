@@ -25,6 +25,7 @@ class Slider extends Component {
         this.props.thunkAction();
     }
     
+    
     render() {
         let dataProduct = this.props.product.bookData.slice(0,3);
         let position = Animated.divide(this.state.scrollX,width);
