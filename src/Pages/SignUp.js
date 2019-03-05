@@ -1,21 +1,47 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image,Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Image, Dimensions, Animated, Easing,TouchableOpacity} from 'react-native';
 import {connect} from "react-redux";
 import {userFetcher} from "../Services/fetchUsers/actionUser";
 import Svg, {Rect, Circle} from "react-native-svg";
 import SvgUri from "react-native-svg-uri";
+import Login from './Login'
+import {createStackNavigator, createSwitchNavigator} from "react-navigation";
+
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
 
 class SignUp extends Component {
-    // componentDidMount() {
-    //     this.props.userFetcher()
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            rotation: new Animated.Value(100)
+        }
+    }
+    
+    componentDidMount() {
+        this.animationRotation();
+    }
+    
+    animationRotation = () => {
+        Animated.timing(
+            this.state.rotation,
+            {
+                toValue: 0,
+                duration: 1000,
+                easing: Easing.back(),
+                useNativeDriver: true
+            }
+        ).start(() => this.animationRotation())
+    };
     
     render() {
         let user = this.props.users.userData;
+        const rotateTransform = this.state.rotation.interpolate({
+            inputRange: [0, 5, 10],
+            outputRange: ['0deg', '180deg', '0deg']
+        });
         return (
-            <View style={styles.className}>
+            <Animated.View style={styles.className}>
                 <Svg height="200" width="200" viewBox="0 0 100 100">
                     <Circle
                         cx={'50'}
@@ -28,25 +54,30 @@ class SignUp extends Component {
                     <Rect
                         x={'15'}
                         y={'15'}
-                        width={'50'}
-                        height={'50'}
+                        width={'70'}
+                        height={'70'}
                         stroke={'#63ee83'}
                         strokeWidth={'2'}
                         fill={'#ffff00'}
                         strokeLinejoin={'bevel'}
-                        rotation={'20'}
                     />
                 </Svg>
-                <SvgUri
-                    width={'200'}
-                    height={'200'}
-                    source={require('../Assets/image/homer-simpson.svg')}
-                    strokeWidth={10}
-                    stroke={'#000'}
-                    strokeLinejoin={'bevel'}
-                />
-                <Text>SignUp</Text>
-            </View>
+                <Animated.View>
+                    <SvgUri
+                        width={'400'}
+                        height={'400'}
+                        source={require('../Assets/image/homer-simpson.svg')}
+                        strokeWidth={10}
+                        stroke={'#000'}
+                        strokeLinejoin={'bevel'}
+                    />
+                </Animated.View>
+                <TouchableOpacity>
+                    <Animated.View style={{transform:[{translateX:this.state.rotation}]}}>
+                        <Text style={styles.font} onPress={() => this.props.navigation.navigate('Login')}>Sign In</Text>
+                    </Animated.View>
+                </TouchableOpacity>
+            </Animated.View>
         );
     }
 }
@@ -57,6 +88,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#e45',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    font: {
+        fontSize: 30,
+        color: '#ffffff'
     }
 });
 const mapStateToProps = (state) => {

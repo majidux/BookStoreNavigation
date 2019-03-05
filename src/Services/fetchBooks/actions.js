@@ -1,4 +1,4 @@
-import {FETCH_BOOKS, SUCCESS_BOOKS, FAILED_BOOKS} from './type';
+import {FETCH_BOOKS, SUCCESS_BOOKS, FAILED_BOOKS,SEARCH_BOOKS} from './type';
 
 export const fetchBooks = () => ({
     type: FETCH_BOOKS
@@ -10,6 +10,10 @@ export const successBooks = (items) => ({
 export const failedData = (error) => ({
     type: FAILED_BOOKS,
     payload: error
+});
+export const searchBook = (text) => ({
+    type: SEARCH_BOOKS,
+    payload:text
 });
 export const thunkAction = () => {
     return async (dispatch) => {

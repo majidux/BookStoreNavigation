@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions,StyleSheet,View,Text} from 'react-native';
+import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import thunk from 'redux-thunk';
@@ -8,6 +8,7 @@ import Splash from "./src/Pages/Splash";
 import BookStore from "./src/Pages/BookStore";
 import SignUp from "./src/Pages/SignUp";
 import Login from "./src/Pages/Login";
+import Search from "./src/Pages/Search";
 
 let deviceWidth = Dimensions.get('window').width;
 
@@ -22,13 +23,13 @@ class App extends Component {
                     {/*<Splash/>*/}
                     {/*<SignUp/>*/}
                     {/*<BookStore/>*/}
-                    <Login/>
+                    <Search/>
+                    {/*<Login/>*/}
                 </View>
             </Provider>
         );
     }
 }
-
 
 
 const styles = StyleSheet.create({

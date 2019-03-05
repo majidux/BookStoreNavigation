@@ -11,10 +11,18 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
-import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import {
+    createAppContainer,
+    createBottomTabNavigator,
+    createStackNavigator,
+    createSwitchNavigator
+} from 'react-navigation';
 import ForgetPass from "../Components/ForgetPass";
 import BookStore from "./BookStore";
 import SignUp from "./SignUp";
+import Search from "./Search";
+import Setting from "./Setting";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
@@ -92,7 +100,9 @@ class Login extends Component {
     forgetPassFunc = () => {
         this.props.navigation.navigate('ForgetPass')
     };
-    
+    loginFunc = () => {
+        this.props.navigation.navigate('SignUp')
+    };
     render() {
         return (
             <Animated.View style={styles.container}>
@@ -124,16 +134,18 @@ class Login extends Component {
                         </Animated.View>
                         <Animated.View
                             style={[styles.buttonStyleView, {transform: [{translateY: this.state.buttonAnimateState}]}]}>
-                            <TouchableOpacity
-                                onPress={() => this.props.navigation.navigate('BookStore')}
-                            >
-                                <View style={[styles.loginButtonView, styles.commonButtonsStyle]}><Text
-                                    style={styles.textStyle}>LOGIN</Text></View>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('BookStore')}>
+                                <View style={[styles.loginButtonView, styles.commonButtonsStyle]}><Text style={styles.textStyle}>LOGIN</Text></View>
                             </TouchableOpacity>
                         </Animated.View>
                         <Animated.View style={[styles.forgetPass, {opacity: this.state.opacityState}]}>
                             <TouchableOpacity onPress={this.forgetPassFunc}>
                                 <Text style={{color: '#fff'}}>Forget your password ?</Text>
+                            </TouchableOpacity>
+                        </Animated.View>
+                        <Animated.View style={[styles.signUp, {opacity: this.state.opacityState}]}>
+                            <TouchableOpacity onPress={this.loginFunc}>
+                                <Text style={{color: '#fff'}}>Register</Text>
                             </TouchableOpacity>
                         </Animated.View>
                     </View>
@@ -143,11 +155,56 @@ class Login extends Component {
     }
 }
 
-const RouteStack = createStackNavigator(
+// const y = createSwitchNavigator({
+//     B: BookStore
+// });
+
+const TabNavigator = createBottomTabNavigator(
+    {
+        BookStore: {
+            screen: BookStore,
+            navigationOptions: {
+                tabBarIcon: ({tintColor: color}) => (
+                    <Icon name="home" size={30} color={color}/>
+                )
+            }
+        },
+        Search: {
+            screen: Search,
+            navigationOptions: {
+                tabBarIcon: ({tintColor: color}) => (
+                    <Icon name="search" size={20} color={color}/>
+                )
+            }
+        },
+        Setting: {
+            screen: Setting,
+            navigationOptions: {
+                tabBarIcon: ({tintColor: color}) => (
+                    <Icon name="gear" size={20} color={color}/>
+                )
+            }
+        }
+    },
+    {
+        tabBarOptions: {
+            showLabel: false,
+            style: {
+                backgroundColor: '#254dec'
+            },
+            
+            activeTintColor: '#fff',
+            inactiveTintColor: '#bdbdbd',
+        }
+    }
+);
+
+const RouteStack = createSwitchNavigator(
     {
         Login: Login,
+        SignUp:SignUp,
         ForgetPass: ForgetPass,
-        BookStore: BookStore
+        BookStore: TabNavigator
     }
 );
 
@@ -222,5 +279,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20
+    },
+    signUp:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10
     }
 });
