@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, Dimensions, Animated, Easing,TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image, Dimensions, Animated, Easing, TouchableOpacity, FlatList} from 'react-native';
 import {connect} from "react-redux";
 import {userFetcher} from "../Services/fetchUsers/actionUser";
 import Svg, {Rect, Circle} from "react-native-svg";
@@ -20,6 +20,7 @@ class SignUp extends Component {
     
     componentDidMount() {
         this.animationRotation();
+        this.props.userFetcher();
     }
     
     animationRotation = () => {
@@ -42,30 +43,38 @@ class SignUp extends Component {
         });
         return (
             <Animated.View style={styles.className}>
-                <Svg height="200" width="200" viewBox="0 0 100 100">
-                    <Circle
-                        cx={'50'}
-                        cy={'50'}
-                        r={'25'}
-                        stroke={'blue'}
-                        strokeWidth={'2.5'}
-                        fill={'green'}
-                    />
-                    <Rect
-                        x={'15'}
-                        y={'15'}
-                        width={'70'}
-                        height={'70'}
-                        stroke={'#63ee83'}
-                        strokeWidth={'2'}
-                        fill={'#ffff00'}
-                        strokeLinejoin={'bevel'}
-                    />
-                </Svg>
+                {/*<Svg height="200" width="200" viewBox="0 0 100 100">*/}
+                    {/*<Circle*/}
+                        {/*cx={'50'}*/}
+                        {/*cy={'50'}*/}
+                        {/*r={'25'}*/}
+                        {/*stroke={'blue'}*/}
+                        {/*strokeWidth={'2.5'}*/}
+                        {/*fill={'green'}*/}
+                    {/*/>*/}
+                    {/*<Rect*/}
+                        {/*x={'15'}*/}
+                        {/*y={'15'}*/}
+                        {/*width={'70'}*/}
+                        {/*height={'70'}*/}
+                        {/*stroke={'#63ee83'}*/}
+                        {/*strokeWidth={'2'}*/}
+                        {/*fill={'#ffff00'}*/}
+                        {/*strokeLinejoin={'bevel'}*/}
+                    {/*/>*/}
+                {/*</Svg>*/}
+                <FlatList
+                    data={this.props.users.userData}
+                    renderItem={({item})=>
+                        <View style={{flex:1,backgroundColor:'red'}}>
+                            <Text>{item.name}</Text>
+                        </View>
+                    }
+                />
                 <Animated.View>
                     <SvgUri
-                        width={'400'}
-                        height={'400'}
+                        width={'100'}
+                        height={'100'}
                         source={require('../Assets/image/homer-simpson.svg')}
                         strokeWidth={10}
                         stroke={'#000'}

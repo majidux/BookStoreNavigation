@@ -19,7 +19,7 @@ export const thunkAction = () => {
     return async (dispatch) => {
         dispatch(fetchBooks());
         try {
-            await fetch(`https://www.googleapis.com/books/v1/volumes?q=movie`)
+                 fetch(`https://www.googleapis.com/books/v1/volumes?q=movie`)
                 .then(response => response.json())
                 .then(data => {
                     dispatch(successBooks(data.items));

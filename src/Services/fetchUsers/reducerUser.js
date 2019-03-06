@@ -12,14 +12,13 @@ export const fetchUserReducer =(state=initialState,action)=>{
                 ...state,
                 loading: true,
                 error:null,
-                
             }
         }
         case SUCCESS_USERS:{
             return{
                 ...state,
                 loading:false,
-                bookData: action.payload
+                userData: action.payload
             }
         }
         case FAILED_USERS:{
@@ -27,7 +26,7 @@ export const fetchUserReducer =(state=initialState,action)=>{
                 ...state,
                 loading:false,
                 error:action.payload,
-                bookData:[]
+                userData:[]
             }
         }
         default:

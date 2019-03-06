@@ -13,7 +13,7 @@ export const failedData = (error) => ({
 });
 export const userFetcher = () => {
     return (dispatch) => {
-        let dataUser = `http://localhost:3000/users`;
+        let dataUser = `http://10.0.2.2:3000/user`;
         dispatch(fetchBooks());
         fetch(dataUser, {method: 'POST'})
             .then(response => response.json())
